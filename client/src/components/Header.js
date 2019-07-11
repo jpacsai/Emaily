@@ -3,7 +3,14 @@ import React from 'react';
 class Header extends React.Component {
   render () {
     return (
-      <h2>Header</h2>
+      <nav className="nav-wrapper">
+        <a className="left brand-logo" href="#">Emaily</a>
+        <ul className="right">
+          <li>
+            <a href="#">Log in with Google</a>
+          </li>
+        </ul>
+      </nav>
     )
   }
 }
