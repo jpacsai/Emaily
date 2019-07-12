@@ -20,7 +20,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./routes/authRoutes')(app);
+require('./routes/auth')(app);
 
 const port = process.env.PORT || 5000;
 app.listen(port);
