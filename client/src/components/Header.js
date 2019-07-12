@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import StripeContainer from './StripeContainer';
 
 const mapStateToProps = ({ auth }) => ({
   auth
@@ -12,9 +14,22 @@ class Header extends React.Component {
       case null:
         return null;
       case false:
-        return <a href="/auth/google">Log in with Google</a>;
+        return (
+          <li>
+            <a href="/auth/google">Log in with Google</a>
+          </li>
+        );
       default:
-        return <a href="/api/logout">Logout</a>;
+        return (
+          <Fragment>
+            <li>
+              <StripeContainer />
+            </li>
+            <li>
+              <a href="/api/logout">Logout</a>
+            </li>
+          </Fragment>
+        );
     }
   };
 
@@ -22,12 +37,10 @@ class Header extends React.Component {
     const { auth } = this.props;
     return (
       <nav className="nav-wrapper">
-        <Link to={ auth ? '/surveys' : '/'} className="left brand-logo">
+        <Link to={auth ? '/surveys' : '/'} className="left brand-logo">
           Emaily
         </Link>
-        <ul className="right">
-          <li>{this.renderContent()}</li>
-        </ul>
+        <ul className="right">{this.renderContent()}</ul>
       </nav>
     );
   }
