@@ -9,6 +9,6 @@ Used technology:
 - Google OAuth
 - MongoDB, Mongoose
 - React, Redux
-- Stripe
+- Stripe.com, Checkout.js
 - SendGrid
 - LocalTunnel
