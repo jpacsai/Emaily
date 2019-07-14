@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
 import { handleToken } from './../store/actions';
 
-const keyPublishable = process.env.stripePublishableKey;
-const keySecret = process.env.stripeSecretKey;
-
 const mapDispatchToProps = { handleToken };
 
 class StripeContainer extends React.Component {
@@ -15,7 +12,7 @@ class StripeContainer extends React.Component {
       <StripeCheckout
         amount={5 * 100}
         token={token => handleToken(token)}
-        stripeKey={process.env.REACT_APP_STRIPE_KEY || keyPublishable}
+        stripeKey={process.env.REACT_APP_STRIPE_KEY}
         name="Emaily"
         description="$5 for 5 survey credits"
       >
