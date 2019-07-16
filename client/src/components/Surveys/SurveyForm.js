@@ -2,13 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
 import { paths } from './../../config';
+import emailValidation from '../../utils/emailValidation';
+
 import SurveyField from './SurveyField';
 
 const FIELDS = [
   { label: 'Survey Title', name: 'title' },
   { label: 'Subject Line', name: 'subject' },
   { label: 'Email body', name: 'body' },
-  { label: 'Recipient List', name: 'emails' }
+  { label: 'Recipient List', name: 'emails', validation: emailValidation }
 ];
 
 class SurveyForm extends React.Component {
@@ -38,10 +40,17 @@ class SurveyForm extends React.Component {
 
 function validate(values) {
   const errors = FIELDS.reduce(
-    (total, { name }) => (
-      !values[name]
-        ? { ...total, [name]: `You must provide ${name}!` }
-        : total),
+    (total, field) => {
+      // if validation function is declared use that
+      if (field.validation && values[field.name]) {
+        const error = field.validation(values[field.name]);
+        return error ? { ...total, [field.name]: error } : total;
+      }
+      // else check if field is not empty
+      return !values[field.name]
+        ? { ...total, [field.name]: `You must provide ${field.name}!` }
+        : total
+    },
     {}
   );
   return errors;
