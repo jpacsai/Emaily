@@ -7,8 +7,7 @@ import { fetchUser } from './../store/actions';
 import Header from './Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
-
-const SurveyNew = () => <h2>SurveyNew</h2>;
+import SurveyNew from './Surveys/SurveyNew';
 
 const mapDispatchToProps = { fetchUser };
 
