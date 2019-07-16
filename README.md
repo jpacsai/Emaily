@@ -8,7 +8,8 @@ Used technology:
 - Passport.js
 - Google OAuth
 - MongoDB, Mongoose
-- React, Redux
+- React, Redux, redux-form
+- Materialize CSS
 - Stripe.com, Checkout.js
 - SendGrid
 - LocalTunnel
