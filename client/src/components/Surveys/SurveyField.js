@@ -6,8 +6,11 @@ const SurveyField = ({ input, label, meta }) => {
   return (
     <div>
       <label>{label}</label>
-      <input {...input} />
-      {touched && error}
+      <input {...input} style={{ marginBottom: '0.25rem'}}/>
+      <p className="red-text" style={{ margin: '0 0 1.5rem'}}>
+        {touched && error}
+      </p>
+      
     </div>
   )
 }
