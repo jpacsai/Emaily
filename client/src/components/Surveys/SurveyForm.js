@@ -38,9 +38,9 @@ class SurveyForm extends React.Component {
 
 function validate(values) {
   const errors = FIELDS.reduce(
-    (total, field) => (
-      !values[field]
-        ? { ...total, [field.name]: `You must provide ${field.name}!` }
+    (total, { name }) => (
+      !values[name]
+        ? { ...total, [name]: `You must provide ${name}!` }
         : total),
     {}
   );
