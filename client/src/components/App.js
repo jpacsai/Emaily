@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { paths } from './../config';
 import { fetchUser } from './../store/actions';
 
 import Header from './Header';
@@ -22,8 +23,8 @@ class App extends React.Component {
         <BrowserRouter>
           <Header />
           <Route exact path="/" component={Landing} />
-          <Route exact path="/surveys" component={Dashboard} />
-          <Route path="/surveys/new" component={SurveyNew} />
+          <Route exact path={paths.SURVEYS} component={Dashboard} />
+          <Route path={paths.NEW_SURVEYS} component={SurveyNew} />
         </BrowserRouter>
       </div>
     );
