@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { paths } from './../../config';
 import { resolveUser } from './actionCreators';
 
 export const fetchUser = () => async (dispatch) => {
@@ -11,7 +12,9 @@ export const handleToken = (token) => async (dispatch) => {
   dispatch(resolveUser(user));
 }
 
-export const submitSurvey = (formValues) => async (dispatch) => {
+export const submitSurvey = (formValues, history) => async (dispatch) => {
   const { data: user } = await axios.post('/api/surveys', formValues);
+
+  history.push(paths.SURVEYS);
   dispatch(resolveUser(user));
 }

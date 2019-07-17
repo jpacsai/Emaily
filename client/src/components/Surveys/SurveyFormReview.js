@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { formFields } from './../../config';
 import { submitSurvey } from '../../store/actions';
 
@@ -9,7 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { submitSurvey };
 
-const SurveyFormReview = ({ onCancel, formValues, submitSurvey }) => {
+const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
   return (
     <div>
       <h5>Please check your details</h5>
@@ -25,7 +26,7 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey }) => {
         Back
       </button>
 
-      <button className="green white-text btn-flat right" onClick={() => submitSurvey(formValues)}>
+      <button className="green white-text btn-flat right" onClick={() => submitSurvey(formValues, history)}>
         Send Survey
         <i className="material-icons right">email</i>
       </button>
@@ -33,4 +34,4 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SurveyFormReview);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SurveyFormReview));
