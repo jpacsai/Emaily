@@ -12,4 +12,4 @@ Used technology:
 - Materialize CSS
 - Stripe.com, Checkout.js
 - SendGrid
-- LocalTunnel
+- ngrok
