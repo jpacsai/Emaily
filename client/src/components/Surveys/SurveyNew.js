@@ -8,13 +8,13 @@ class SurveyNew extends React.Component {
   };
 
   toggleShowReview = () => {
-    this.setState({ showReview: true });
+    this.setState({ showReview: !this.state.showReview });
   };
 
   renderContent() {
     return (
       this.state.showReview ?
-        <SurveyFormReview /> :
+        <SurveyFormReview onCancel={this.toggleShowReview}/> :
         <SurveyForm onSurveySubmit={this.toggleShowReview} />
     );
   }
