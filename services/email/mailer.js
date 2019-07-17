@@ -3,10 +3,10 @@ const { mail: helper} = sendGrid;
 const keys = require('../../config/keys');
 
 class Mailer extends helper.Mail {
-  constructor({ subject, recipients}, content) {
+  constructor({ subject, recipients }, content) {
     super();
 
-    this.sgApi = sendgrid(keys.SEND_GRID_KEY);
+    this.sgApi = sendGrid(keys.SEND_GRID_KEY);
     this.from_email = new helper.Email('no-reply@email.com');
     this.subject = subject;
     this.body = new helper.Content('text/html', content);
@@ -18,7 +18,7 @@ class Mailer extends helper.Mail {
   }
 
   formatAddresses (recipients) {
-    recipients.map(({ email }) => new helper.Email(email));
+    return recipients.map(({ email }) => new helper.Email(email));
   }
 
   addClickTracking () {
