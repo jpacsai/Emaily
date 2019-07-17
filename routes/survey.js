@@ -7,7 +7,7 @@ const Mailer = require('../services/email/mailer');
 const Survey = mongoose.model('surveys');
 
 module.exports = (app) => {
-  app.get('api/surveys/thanks', (req, res) => {
+  app.get('/api/surveys/thanks', (req, res) => {
     res.send('Thanks for voting!');
   });
 
@@ -38,5 +38,10 @@ module.exports = (app) => {
     } catch (err) {
       res.status(422).send(err);
     }
+  });
+
+  app.post('/api/surveys/webhooks', (req, res) => {
+    console.log(req.body);
+    res.send({});
   });
 }

@@ -6,6 +6,7 @@ module.exports = function(app) {
     '/api',
     '/api/current_user',
     '/api/stripe',
-    '/api/surveys'
+    '/api/surveys',
+    '/api/surveys/thanks'
   ], { target: 'http://localhost:5000' }));
 };
