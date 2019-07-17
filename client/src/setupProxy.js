@@ -5,6 +5,7 @@ module.exports = function(app) {
     '/auth/google',
     '/api',
     '/api/current_user',
-    '/api/stripe'
+    '/api/stripe',
+    '/api/surveys'
   ], { target: 'http://localhost:5000' }));
 };
