@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { formFields } from './../../config';
-import { submitSurvey } from './../../store/actions/thunks';
+import { submitSurvey } from '../../store/actions';
 
 const mapStateToProps = state => ({
   formValues: state.form.surveyForm.values
 });
 
-const SurveyFormReview = ({ onCancel, formValues }) => {
+const mapDispatchToProps = { submitSurvey };
+
+const SurveyFormReview = ({ onCancel, formValues, submitSurvey }) => {
   return (
     <div>
       <h5>Please check your details</h5>
@@ -31,4 +33,4 @@ const SurveyFormReview = ({ onCancel, formValues }) => {
   );
 };
 
-export default connect(mapStateToProps)(SurveyFormReview);
+export default connect(mapStateToProps, mapDispatchToProps)(SurveyFormReview);
