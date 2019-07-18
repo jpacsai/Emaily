@@ -12,6 +12,12 @@ const Mailer = require('../services/email/mailer');
 const Survey = mongoose.model('surveys');
 
 module.exports = (app) => {
+  app.get('/api/surveys', requireLogin, async (req, res) => {
+    const surveys = await Survey.find({ _belongs_to: req.user.id }).select({ recipients: false });
+    res.send(surveys);
+  });
+
+  // TODO: check why this doesnt work --> proxy setting? :(
   app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thanks for voting!');
   });
