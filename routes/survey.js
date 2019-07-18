@@ -47,12 +47,15 @@ module.exports = (app) => {
     const p = new Path('/api/surveys/:surveyId/:choice');
 
     const events = req.body.reduce((total, { url, email }) => {
+      if (!url) return;
       const { pathname } = new URL(url);
       const match = p.test(pathname);
       return match ? [...total, { email, surveyId: match.surveyId, choice: match.choice }] : total;
     }, []);
     
-    const uniqeEvents = _.uniqBy(events, 'email', 'surveyId');
-    console.log(uniqeEvents);
+    if (!events) return;
+
+    const uniqueEvents = _.uniqBy(events, 'email', 'surveyId');
+    console.log(uniqueEvents);
   });
 }
