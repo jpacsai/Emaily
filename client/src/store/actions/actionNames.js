@@ -1,1 +1,2 @@
 export const RESOLVE_USER = 'RESOLVE_USER';
+export const RESOLVE_SURVEYS = 'RESOLVE_SURVEYS';
