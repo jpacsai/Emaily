@@ -1,8 +1,10 @@
 const _ = require('lodash');
 const Path = require('path-parser').default;
 const { URL } = require('url');
-const surveyTemplate = require('../services/email/surveyTemplates');
 const mongoose = require('mongoose');
+const { ObjectId } = require('mongodb');
+
+const surveyTemplate = require('../services/email/surveyTemplates');
 const requireLogin = require('../middleware/requireLogin');
 const requireCredits = require('../middleware/requireCredits');
 const Mailer = require('../services/email/mailer');
@@ -10,7 +12,7 @@ const Mailer = require('../services/email/mailer');
 const Survey = mongoose.model('surveys');
 
 module.exports = (app) => {
-  app.get('/api/surveys/thanks', (req, res) => {
+  app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thanks for voting!');
   });
 
@@ -52,10 +54,29 @@ module.exports = (app) => {
       const match = p.test(pathname);
       return match ? [...total, { email, surveyId: match.surveyId, choice: match.choice }] : total;
     }, []);
-    
+
     if (!events) return;
 
     const uniqueEvents = _.uniqBy(events, 'email', 'surveyId');
+
+    if (!uniqueEvents) return;
+
+    uniqueEvents.forEach(({ surveyId, email, choice }) => {
+      Survey.updateOne(
+        {
+          _id: new ObjectId(surveyId),
+          recipients: {
+            $elemMatch: { email: email, responded: { $ne: true } }
+          }
+        }, 
+        {
+          $inc: { [choice]: 1},
+          $set: { 'recipients.$.responded': true },
+          last_responded: new Date()
+        }
+      ).exec();
+    });
+
     console.log(uniqueEvents);
   });
 }
