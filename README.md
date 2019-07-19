@@ -136,7 +136,7 @@ The site was tested on Google Chrome only
 
 ## 📜 Licence
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/jpacsai/Neighborhood-App/blob/master/LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/jpacsai/Emaily/blob/master/README.md) file for details
 
 ## 💰 Credits
 - Thank you for [Stephen Grider](https://www.udemy.com/user/sgslo/) for creating the course
