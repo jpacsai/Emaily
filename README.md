@@ -7,7 +7,7 @@ The aim of the project was to build the front- and back end of a survey-email se
 
 ## 📑 Table of Contents
 * [Live link](#-live-link)
-* [Dev stack](#
+* [Dev stack](#-dev-stack)
 * [Getting started](#-getting-started)
 * [How to use](#-how-to-use)
 * [Licence](#-licence)
