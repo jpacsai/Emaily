@@ -15,7 +15,7 @@ const mapDispatchToProps = { fetchUser, resolveSurvey };
 
 class App extends React.Component {
   state = {
-    endpoint: 'http://localhost:5000'
+    endpoint: process.env.URL
   }
 
   componentDidMount() {
