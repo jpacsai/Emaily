@@ -17,7 +17,6 @@ module.exports = (app) => {
     res.send(surveys);
   });
 
-  // TODO: check why this doesnt work --> proxy setting? :(
   app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thanks for voting!');
   });
@@ -67,10 +66,12 @@ module.exports = (app) => {
 
     if (!uniqueEvents) return;
 
-    uniqueEvents.forEach(({ surveyId, email, choice }) => {
+    uniqueEvents.forEach(async ({ surveyId, email, choice }) => {
+      const id = new ObjectId(surveyId);
+
       Survey.updateOne(
         {
-          _id: new ObjectId(surveyId),
+          _id: id,
           recipients: {
             $elemMatch: { email: email, responded: { $ne: true } }
           }
@@ -81,6 +82,9 @@ module.exports = (app) => {
           last_responded: new Date()
         }
       ).exec();
+
+      const updatedSurvey = await Survey.findOne({ _id: id }).select({ recipients: false });
+      req.app.io.emit("refreshSurvey", updatedSurvey);
     });
 
     console.log(uniqueEvents);
