@@ -118,7 +118,7 @@ The system expected to have the following dependencies installed
      - below that: type in the GitHub repo name, and connect
      - scroll down: `Manual deploy`, make sure the `master` branch is selected (or your prefered branch), click `Deploy Branch`
      
-### Service Worker  
+##### Service Worker  
 Service worker is being activated in the production version
      
 ### 🏃 Starting app on local machine after inital setup  
