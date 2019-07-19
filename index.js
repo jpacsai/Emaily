@@ -54,3 +54,23 @@ io.sockets.on('connection', function (socket) {
 require('./routes/auth')(app);
 require('./routes/billing')(app);
 require('./routes/survey')(app);
+
+/*
+
+const server = require('http').createServer(app)
+
+const io = require('socket.io').listen(server);
+
+server.io = io;
+
+io.sockets.on('connection', function (socket) {
+  console.log('socket connecting');
+
+  socket.on('disconnect', function() {
+    console.log("...socket disconnected");
+  });
+});
+
+const port = process.env.PORT || 5000;
+server.listen(port);
+*/
