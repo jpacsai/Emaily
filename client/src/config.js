@@ -2,8 +2,7 @@ import emailValidation from './utils/emailValidation';
 
 export const paths = {
   SURVEYS: '/surveys',
-  NEW_SURVEYS: '/surveys/new',
-  LOGOUT: '/api/logout'
+  NEW_SURVEYS: '/surveys/new'
 }
 
 export const formFields = [
