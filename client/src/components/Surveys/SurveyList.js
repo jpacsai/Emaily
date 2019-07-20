@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchSurveys } from '../../store/actions';
+import { getSurveys } from './../../store/selectors';
 
-const mapStateToProps = ({ surveys }) => ({
-  surveys
+const mapStateToProps = (state) => ({
+  surveys: getSurveys(state)
 });
 
 const mapDispatchToProps = { fetchSurveys };

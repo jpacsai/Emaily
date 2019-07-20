@@ -1,5 +1,5 @@
 import React from 'react';
-import socketIOClient  from 'socket.io-client';
+import socketIOClient from 'socket.io-client';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { paths } from './../config';
@@ -10,20 +10,19 @@ import Landing from './Landing';
 import Dashboard from './Dashboard';
 import SurveyNew from './Surveys/SurveyNew';
 
-
 const mapDispatchToProps = { fetchUser, resolveSurvey };
 
 class App extends React.Component {
   state = {
     endpoint: 'http://localhost:5000'
-  }
+  };
 
   componentDidMount() {
     this.props.fetchUser();
 
     const { endpoint } = this.state;
     const socket = socketIOClient(endpoint);
-    socket.on("refreshSurvey", survey => {
+    socket.on('refreshSurvey', survey => {
       if (survey) this.props.resolveSurvey(survey);
     });
   }

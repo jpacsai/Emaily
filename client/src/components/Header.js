@@ -1,16 +1,18 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getMe } from '../store/selectors';
 
 import StripeContainer from './StripeContainer';
 
-const mapStateToProps = ({ auth }) => ({
-  auth
+const mapStateToProps = state => ({
+  me: getMe(state)
 });
 
 class Header extends React.Component {
   renderContent = () => {
-    switch (this.props.auth) {
+    const { me } = this.props;
+    switch (me) {
       case null:
         return null;
       case false:
@@ -25,9 +27,7 @@ class Header extends React.Component {
             <li>
               <StripeContainer />
             </li>
-            <li style={{ margin: '0 10px' }}>
-              Credits: { this.props.auth.credits }
-            </li>
+            <li style={{ margin: '0 10px' }}>Credits: {me.credits}</li>
             <li>
               <a href="/api/logout">Logout</a>
             </li>
@@ -37,10 +37,10 @@ class Header extends React.Component {
   };
 
   render() {
-    const { auth } = this.props;
+    const { me } = this.props;
     return (
       <nav className="nav-wrapper">
-        <Link to={auth ? '/surveys' : '/'} className="left brand-logo">
+        <Link to={!!me ? '/surveys' : '/'} className="left brand-logo">
           Emaily
         </Link>
         <ul className="right">{this.renderContent()}</ul>
