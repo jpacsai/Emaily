@@ -29,6 +29,7 @@ Open the page directly from [here](https://obscure-tundra-54097.herokuapp.com/)
 - Stripe API
 - SendGrid API
 - ngrok
+- socket.io (only locally, in progress)
 
 ## 🏁 Getting started
 
