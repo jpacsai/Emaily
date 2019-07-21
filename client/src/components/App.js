@@ -20,11 +20,13 @@ class App extends React.Component {
   componentDidMount() {
     this.props.fetchUser();
 
-    const { endpoint } = this.state;
-    const socket = socketIOClient(endpoint);
-    socket.on('refreshSurvey', survey => {
-      if (survey) this.props.resolveSurvey(survey);
-    });
+    if (process.env.NODE_ENV === "development") {
+      const { endpoint } = this.state;
+      const socket = socketIOClient(endpoint);
+      socket.on('refreshSurvey', survey => {
+        if (survey) this.props.resolveSurvey(survey);
+      });
+    }
   }
 
   render() {

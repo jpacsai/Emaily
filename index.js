@@ -38,17 +38,19 @@ const port = process.env.PORT || 5000;
 
 const server = app.listen(port);
 
-let io = require('socket.io')(server);
+if (process.env.NODE_ENV !== 'production') {
+  let io = require('socket.io')(server);
 
-app.io = io;
+  app.io = io;
 
-io.sockets.on('connection', function(socket) {
-  console.log('socket connecting');
+  io.sockets.on('connection', function(socket) {
+    console.log('socket connecting');
 
-  socket.on('disconnect', function() {
-    console.log('...socket disconnected');
+    socket.on('disconnect', function() {
+      console.log('...socket disconnected');
+    });
   });
-});
+}
 
 // ------- ROUTES -------
 require('./routes/auth')(app);
