@@ -12,16 +12,17 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = { submitSurvey };
 
 const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
+  console.log(formValues);
   return (
     <div>
       <h5>Please check your details</h5>
 
-      { formFields.map(({ label, name}) => (
+      {formFields.map(({ label, name }) => (
         <div key={name}>
           <label>{label}</label>
           <p>{formValues[name]}</p>
         </div>
-      )) }
+      ))}
 
       <button className="yellow darken-3 white-text btn-flat" onClick={onCancel}>
         Back
@@ -35,4 +36,7 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SurveyFormReview));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(SurveyFormReview));

@@ -2,18 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { paths } from './../config';
-import { fetchUser } from './../store/actions';
-
+import { fetchInitData } from './../store/actions';
 import Header from './Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
 import SurveyNew from './Surveys/SurveyNew';
 
-const mapDispatchToProps = { fetchUser };
+const mapDispatchToProps = { fetchInitData };
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.fetchUser();
+    this.props.fetchInitData();
   }
 
   render() {

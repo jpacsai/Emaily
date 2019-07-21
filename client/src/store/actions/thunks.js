@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { paths } from './../../config';
-import { resolveUser, resolveSurvey } from './actionCreators';
+import { resolveUser, resolveSurveys } from './actionCreators';
+import { initSocketIO } from './socket';
+
+export const fetchInitData = () => async (dispatch) => {
+  dispatch(fetchUser());
+  if (process.env.NODE_ENV === "development") dispatch(initSocketIO());
+}
 
 export const fetchUser = () => async (dispatch) => {
   const { data: user } = await axios.get('/api/current_user');
@@ -21,5 +27,5 @@ export const submitSurvey = (formValues, history) => async (dispatch) => {
 
 export const fetchSurveys = () => async (dispatch) => {
   const { data: surveys } = await axios.get('api/surveys');
-  dispatch(resolveSurvey(surveys));
+  dispatch(resolveSurveys(surveys));
 }

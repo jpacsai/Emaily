@@ -11,13 +11,12 @@ const Mailer = require('../services/email/mailer');
 
 const Survey = mongoose.model('surveys');
 
-module.exports = (app) => {
+module.exports = app => {
   app.get('/api/surveys', requireLogin, async (req, res) => {
     const surveys = await Survey.find({ _belongs_to: req.user.id }).select({ recipients: false });
     res.send(surveys);
   });
 
-  // TODO: check why this doesnt work --> proxy setting? :(
   app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thanks for voting!');
   });
@@ -28,7 +27,7 @@ module.exports = (app) => {
     const parsedRecipients = recipients.split(',').map(email => ({ email: email.trim() }));
 
     const newSurvey = new Survey({
-      title, 
+      title,
       subject,
       body,
       recipients: parsedRecipients,
@@ -41,10 +40,10 @@ module.exports = (app) => {
     try {
       await mailer.send();
       await newSurvey.save();
-  
+
       req.user.credits -= 1;
       const updatedUser = await req.user.save();
-      
+
       res.send(updatedUser);
     } catch (err) {
       res.status(422).send(err);
@@ -67,22 +66,28 @@ module.exports = (app) => {
 
     if (!uniqueEvents) return;
 
-    uniqueEvents.forEach(({ surveyId, email, choice }) => {
-      Survey.updateOne(
+    uniqueEvents.forEach(async ({ surveyId, email, choice }) => {
+      const id = new ObjectId(surveyId);
+
+      const { nModified: updated } = await Survey.updateOne(
         {
-          _id: new ObjectId(surveyId),
+          _id: id,
           recipients: {
             $elemMatch: { email: email, responded: { $ne: true } }
           }
-        }, 
+        },
         {
-          $inc: { [choice]: 1},
+          $inc: { [choice]: 1 },
           $set: { 'recipients.$.responded': true },
           last_responded: new Date()
         }
       ).exec();
-    });
 
-    console.log(uniqueEvents);
+      if (!!updated && process.env.NODE_ENV !== 'production') {
+        console.log({ surveyId, email, choice });
+        const updatedSurvey = await Survey.findOne({ _id: id }).select({ recipients: false });
+        req.app.io.emit('update-survey', updatedSurvey);
+      }
+    });
   });
-}
+};

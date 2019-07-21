@@ -5,7 +5,7 @@ import { getMe } from '../store/selectors';
 
 import StripeContainer from './StripeContainer';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   me: getMe(state)
 });
 
