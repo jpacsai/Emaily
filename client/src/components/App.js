@@ -1,32 +1,18 @@
 import React from 'react';
-import socketIOClient from 'socket.io-client';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { paths } from './../config';
-import { fetchUser, resolveSurvey } from './../store/actions';
-
+import { fetchInitData } from './../store/actions';
 import Header from './Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
 import SurveyNew from './Surveys/SurveyNew';
 
-const mapDispatchToProps = { fetchUser, resolveSurvey };
+const mapDispatchToProps = { fetchInitData };
 
 class App extends React.Component {
-  state = {
-    endpoint: 'http://localhost:5000'
-  };
-
   componentDidMount() {
-    this.props.fetchUser();
-
-    if (process.env.NODE_ENV === "development") {
-      const { endpoint } = this.state;
-      const socket = socketIOClient(endpoint);
-      socket.on('refreshSurvey', survey => {
-        if (survey) this.props.resolveSurvey(survey);
-      });
-    }
+    this.props.fetchInitData();
   }
 
   render() {

@@ -86,7 +86,7 @@ module.exports = app => {
       if (!!updated && process.env.NODE_ENV !== 'production') {
         console.log({ surveyId, email, choice });
         const updatedSurvey = await Survey.findOne({ _id: id }).select({ recipients: false });
-        req.app.io.emit('refreshSurvey', updatedSurvey);
+        req.app.io.emit('update-survey', updatedSurvey);
       }
     });
   });

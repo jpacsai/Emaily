@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { paths } from './../../config';
 import { resolveUser, resolveSurveys } from './actionCreators';
+import { initSocketIO } from './socket';
+
+export const fetchInitData = () => async (dispatch) => {
+  dispatch(fetchUser());
+  if (process.env.NODE_ENV === "development") dispatch(initSocketIO());
+}
 
 export const fetchUser = () => async (dispatch) => {
   const { data: user } = await axios.get('/api/current_user');
