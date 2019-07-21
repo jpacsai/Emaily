@@ -11,7 +11,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = { submitSurvey };
 
 const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
-  console.log(formValues);
   return (
     <div>
       <h5>Please check your details</h5>
