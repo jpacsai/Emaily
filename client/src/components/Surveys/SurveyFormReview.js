@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { formFields } from './../../config';
+import { getFormValues } from '../../store/selectors';
 import { submitSurvey } from '../../store/actions';
 
 const mapStateToProps = state => ({
-  formValues: state.form.surveyForm.values
+  formValues: getFormValues(state)
 });
 
 const mapDispatchToProps = { submitSurvey };

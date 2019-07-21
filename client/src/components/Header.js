@@ -27,7 +27,9 @@ class Header extends React.Component {
             <li>
               <StripeContainer />
             </li>
-            <li style={{ margin: '0 10px' }}>Credits: {me.credits}</li>
+            <li style={{ margin: '0 10px' }}>
+              Credits: { me.credits }
+            </li>
             <li>
               <a href="/api/logout">Logout</a>
             </li>
@@ -40,7 +42,7 @@ class Header extends React.Component {
     const { me } = this.props;
     return (
       <nav className="nav-wrapper">
-        <Link to={!!me ? '/surveys' : '/'} className="left brand-logo">
+        <Link to={ !!me ? '/surveys' : '/' } className="left brand-logo">
           Emaily
         </Link>
         <ul className="right">{this.renderContent()}</ul>

@@ -122,17 +122,18 @@ The system expected to have the following dependencies installed
 Service worker is being activated in the production version
      
 ### 🏃 Starting app on local machine after inital setup  
-- every time:
-- 1. start app on local machine with the terminal from the project root folder: `npm run dev`
-- 2. AFTER the app has stared running, start ngrok: `ngrok http 5000`
-- 3. open your development(!) SendGrid account (which you created first) and paste in `Settings` -> `Mail settings` --> `Event Notification` --> `Edit`
-- 4. paste the ngrok link into `HTTP POST URL` like this: `ngroklinkhere/api/surveys/webhooks`
+1. start app on local machine with the terminal from the project root folder: `npm run dev`
+2. AFTER the app has stared running, start ngrok: `ngrok http 5000`
+3. open your development(!) SendGrid account (which you created first) and paste in `Settings` -> `Mail settings` --> `Event Notification` --> `Edit`
+4. paste the ngrok link into `HTTP POST URL` like this: `ngroklinkhere/api/surveys/webhooks`
 ❗ **every time after you shut down ngrok and start it, it generates a new link so must update it in your development(!) SendGrid account too**
 
 ### Browser compatibility  
 The site was tested on Google Chrome only
 
 ## 🍴 How to use 
+
+TODO
 
 ## 📜 Licence
 

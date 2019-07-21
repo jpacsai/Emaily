@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { getSurveys } from './../../store/selectors';
 import { fetchSurveys } from '../../store/actions';
 import { getSurveys } from './../../store/selectors';
 
