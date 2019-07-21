@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { formFields } from './../../config';
 import { submitSurvey } from '../../store/actions';
-import { getFormValues } from '../../store/selectors';
 
 const mapStateToProps = state => ({
-  formValues: getFormValues(state)
+  formValues: state.form.surveyForm.values
 });
 
 const mapDispatchToProps = { submitSurvey };
 
 const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
+  console.log(formValues);
   return (
     <div>
       <h5>Please check your details</h5>
