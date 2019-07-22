@@ -21,6 +21,22 @@ module.exports = app => {
     res.send('Thanks for voting!');
   });
 
+  app.delete('/api/surveys/:surveyId', requireLogin, async (req, res) => {
+    try {
+      const p = new Path('/api/surveys/:surveyId');
+      const { surveyId } = p.test(req.url);
+      const id = new ObjectId(surveyId);
+  
+      const { deletedCount } = await Survey.deleteOne({ _id: id }).exec();
+
+      if (!!deletedCount) console.log(`Deleted survey: ${surveyId}`);
+
+      res.status(!!deletedCount ? 200 : 404).send();
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  });
+
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
     const { title, subject, body, recipients } = req.body;
 
@@ -43,7 +59,7 @@ module.exports = app => {
 
       req.user.credits -= 1;
       const updatedUser = await req.user.save();
-
+      
       res.send(updatedUser);
     } catch (err) {
       res.status(422).send(err);
