@@ -104,6 +104,7 @@ The system expected to have the following dependencies installed
 16. Create a new project on **Heroku** (https://heroku.com)
 17. Inside the Heroku project dashboard, click on the `Settings` menu, scroll down to `Config vars`, reveal them
 18. Create another Google project, this will be the production version:
+     - **Authorized domains**: add the heroku app link without `https://`
      - **add Authorized JavaScript origins**: copy and paste the heroku app link (`Open app` button on top of the page) here
      - **Authorized redirect URIs**: `yourherokuapplinkhere/auth/google/callback`
      - create client id and client secret
