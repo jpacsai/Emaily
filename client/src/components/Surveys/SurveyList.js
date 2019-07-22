@@ -17,7 +17,7 @@ class SurveyList extends React.Component {
     const surveys = [...this.props.surveys].reverse();
     return (
       surveys.map((survey, i) => (
-        <div key={i} className="card red lighten-5">
+        <div key={i} className="card teal lighten-5">
           <div className="card-content">
             <span className="card-title">{survey.title}</span>
             <p>
@@ -28,8 +28,8 @@ class SurveyList extends React.Component {
             </p>
           </div>
           <div className="card-action">
-            <p>Yes: {survey.yes}</p>
-            <p>No: {survey.no}</p>
+            <a>Yes: {survey.yes}</a>
+            <a>No: {survey.no}</a>
           </div>
         </div>
       ))
