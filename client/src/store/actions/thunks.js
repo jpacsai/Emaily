@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { paths } from './../../config';
-import { resolveUser, resolveSurveys } from './actionCreators';
+import { resolveUser, resolveSurveys, removeSurvey } from './actionCreators';
 import { initSocketIO } from './socket';
 
 export const fetchInitData = () => async (dispatch) => {
@@ -29,3 +29,9 @@ export const fetchSurveys = () => async (dispatch) => {
   const { data: surveys } = await axios.get('api/surveys');
   dispatch(resolveSurveys(surveys));
 }
+
+export const deleteSurvey = (surveyId) => async (dispatch) => {
+  const { status } = await axios.delete(`api/surveys/${surveyId}`);
+  if (status === 200) dispatch(removeSurvey(surveyId))
+}
+

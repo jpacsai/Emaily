@@ -2,7 +2,6 @@ import socketIOClient from 'socket.io-client';
 import { resolveSurvey } from './actionCreators';
 
 export const initSocketIO = () => async (dispatch) => {
-  console.log('socket');
   const endpoint = 'http://localhost:5000';
   const socket = socketIOClient(endpoint);
 

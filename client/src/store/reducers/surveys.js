@@ -1,4 +1,4 @@
-import { RESOLVE_SURVEYS, RESOLVE_SURVEY } from './../actions/actionNames';
+import { RESOLVE_SURVEYS, RESOLVE_SURVEY, REMOVE_SURVEY } from './../actions/actionNames';
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -11,6 +11,8 @@ export default (state = [], action) => {
           ? state
           : state.map(survey => (survey._id === action.payload._id ? action.payload : survey))
         : [...state, action.payload];
+    case REMOVE_SURVEY:
+      return state.filter(survey => survey._id !== action.payload);
     default:
       return state;
   }
