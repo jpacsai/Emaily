@@ -17,7 +17,6 @@ module.exports = (app) => {
     res.send(surveys);
   });
 
-  // TODO: check why this doesnt work --> proxy setting? :(
   app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thanks for voting!');
   });
