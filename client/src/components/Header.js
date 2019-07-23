@@ -12,37 +12,24 @@ const mapStateToProps = state => ({
 class Header extends React.Component {
   renderContent = () => {
     const { me } = this.props;
-    switch (me) {
-      case null:
-        return null;
-      case false:
-        return (
-          <li>
-            <a href="/auth/google">Log in with Google</a>
-          </li>
-        );
-      default:
-        return (
-          <Fragment>
-            <li>
-              <StripeContainer />
-            </li>
-            <li style={{ margin: '0 10px' }}>
-              Credits: { me.credits }
-            </li>
-            <li>
-              <a href="/api/logout">Logout</a>
-            </li>
-          </Fragment>
-        );
-    }
+    return !me ? null : (
+      <Fragment>
+        <li>
+          <StripeContainer />
+        </li>
+        <li style={{ margin: '0 10px' }}>Credits: {me.credits}</li>
+        <li>
+          <a href="/api/logout">Logout</a>
+        </li>
+      </Fragment>
+    );
   };
 
   render() {
     const { me } = this.props;
     return (
       <nav className="nav-wrapper">
-        <Link to={ !!me ? '/surveys' : '/' } className="left brand-logo">
+        <Link to={!!me ? '/surveys' : '/'} className="left brand-logo">
           Emaily
         </Link>
         <ul className="right">{this.renderContent()}</ul>
