@@ -7,6 +7,7 @@ import Header from './Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
 import SurveyNew from './Surveys/SurveyNew';
+import Settings from './Settings';
 
 const mapDispatchToProps = { fetchInitData };
 
@@ -23,6 +24,7 @@ class App extends React.Component {
           <Route exact path="/" component={Landing} />
           <Route exact path={paths.SURVEYS} component={Dashboard} />
           <Route path={paths.NEW_SURVEYS} component={SurveyNew} />
+          <Route path={paths.SETTINGS} component={Settings} />
         </BrowserRouter>
       </div>
     );
