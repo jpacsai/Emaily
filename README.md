@@ -47,7 +47,8 @@ The system expected to have the following dependencies installed
 5. **Google OAuth2**:
     - a helpful article [here](https://medium.com/@pablo127/google-api-authentication-with-oauth-2-on-the-example-of-gmail-a103c897fd98)
     - name the project `emaily-dev` or something similar (keep in mind, we are going to have a `production` one too!)
-    - add to **Authorized redirect URIs**: `http://localhost:5000/auth/google/callback`
+    - add to **Authorized JavaScript origins**: `http://localhost:5000`
+    - add to **Authorized redirect URIs**: `http://localhost:5000/auth/google/callback` and `http://localhost:3000/auth/google/callback`
     - paste your google client id into the renamed `dev.js` file (`GOOGLE_CLIENT_ID`)
     - paste your google client secret into the renamed `dev.js` file too (`GOOGLE_CLIENT_SECRET`)
 6. **MongoDB**:
