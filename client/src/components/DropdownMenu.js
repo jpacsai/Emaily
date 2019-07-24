@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router-dom';
+import { paths } from './../config';
 
 import './DropdownMenu.scss';
 
@@ -25,13 +27,13 @@ const DropdownMenu = ({ onClose }) => {
       <div id="menu-wrapper" className="wrapper" ref={node}>
         <ul className="dropdown-menu">
           <li>
-            <a href="#!">
+            <Link to={paths.SETTINGS} onClick={onClose}>
               <span>Settings</span>
-            </a>
+            </Link>
           </li>
           <li className="divider" />
           <li>
-            <a href="/api/logout">
+            <a href="/api/logout" onClick={onClose}>
               <span>Log out</span>
             </a>
           </li>
