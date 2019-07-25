@@ -1,7 +1,11 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
-const User = mongoose.model('users');
 const { ObjectId } = require('mongodb');
+const requireLogin = require('../middleware/requireLogin');
+
+const User = mongoose.model('users');
+const Survey = mongoose.model('surveys');
+
 
 module.exports = app => {
   app.get(
@@ -28,14 +32,17 @@ module.exports = app => {
     res.send(req.user);
   });
 
-  app.delete('/api/current_user', async (req, res) => {
+  app.delete('/api/current_user', requireLogin, async (req, res) => {
     if (!req.user) return;
 
-    const id = new ObjectId(req.user.id);
+    const userID = new ObjectId(req.user.id);
 
-    const { deletedCount } = await User.deleteOne({ _id: id }).exec();
-    if (!!deletedCount) console.log(`Deleted user: ${id}`);
+    const { deletedCount: deletedSurveys } = await Survey.deleteMany({ _belongs_to: userID }).exec();
+    if (!!deletedSurveys) console.log(`Deleted surveys number: ${deletedSurveys}`);
 
-    res.status(!!deletedCount ? 200 : 404).send();
+    const { deletedCount: deletedUser } = await User.deleteOne({ _id: userID }).exec();
+    if (!!deletedUser) console.log(`Deleted user: ${userID}`);
+
+    res.status(!!deletedUser ? 200 : 404).send();
   });
 };
