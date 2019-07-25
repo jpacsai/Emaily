@@ -15,7 +15,7 @@ class Landing extends React.Component {
       <div className="LandingPage">
         <h2>Landing</h2>
         {!!me || me === null ? null : (
-          <button className="red btn-flat white-text">
+          <button className="red btn-flat white-text login-btn">
             <a href="/auth/google">Log in with Google</a>
           </button>
         )}

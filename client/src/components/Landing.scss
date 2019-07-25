@@ -1,3 +1,9 @@
 .LandingPage {
   text-align: center;
+
+  .login-btn {
+    > a {
+      color: inherit;
+    }
+  }
 }
