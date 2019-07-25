@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { paths } from './../config';
 
 import SurveyList from './Surveys/SurveyList';
-import { paths } from './../config';
 
 const Dashboard = () => {
   return (

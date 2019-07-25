@@ -35,3 +35,11 @@ export const deleteSurvey = (surveyId) => async (dispatch) => {
   if (status === 200) dispatch(removeSurvey(surveyId))
 }
 
+export const deleteUser = (history) => async (dispatch) => {
+  const { status } = await axios.delete(`/api/current_user`);
+  if (status === 200) {
+    await dispatch(fetchUser());
+    history.push('/');
+  }
+}
+
