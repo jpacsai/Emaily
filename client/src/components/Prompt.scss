@@ -1,0 +1,26 @@
+.Prompt-container {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(128, 128, 128, 0.7);
+
+  .Prompt {
+    min-width: 30%;
+
+    main {
+      padding: 1rem 0;
+    }
+
+    footer {
+      height: 2.5rem;
+      box-sizing: content-box;
+      padding: 1rem 0 0;
+    }
+  }
+}
