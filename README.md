@@ -1,7 +1,7 @@
 # Emaily web app 📧
 coursework for [Udemy - Node with React: Fullstack Web Development course](https://www.udemy.com/node-with-react-fullstack-web-development/)
 
-The aim of the project was to build the front- and back end of a survey-email sender web application.
+The aim of the project was to build the front- and backend of a survey-email sender web application.
 
 ***
 
