@@ -1,8 +1,10 @@
+@import '../variables.scss';
+
 .Header {
   .nav-list {
     position: relative;
 
-    .credits {
+    > * {
       padding: 0 15px;
     }
 
@@ -11,17 +13,18 @@
       min-height: 64px;
       display: flex;
       align-items: center;
+      cursor: pointer;
 
-      > a {
+      > i {
         min-height: 64px;
-
-        > i {
-          min-height: 64px;
-          margin: 0;
-          display: flex;
-          align-items: center;
-        }
+        margin: 0;
+        display: flex;
+        align-items: center;
       }
+    }
+
+    .dropdown:hover {
+      background-color: $red-hover;
     }
   }
 }

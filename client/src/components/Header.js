@@ -17,7 +17,7 @@ class Header extends React.Component {
   };
 
   handleToggleMenu = () => {
-    this.setState({ menuOpen: !this.state.menuOpen })
+    this.setState({ menuOpen: !this.state.menuOpen });
   };
 
   renderContent = () => {
@@ -30,10 +30,8 @@ class Header extends React.Component {
           <StripeContainer />
         </li>
         <li className="credits">Credits: {me.credits}</li>
-        <li className="dropdown">
-          <a className="dropdown-trigger" href="#!" onClick={this.handleToggleMenu}>
-            <i className="material-icons right">settings</i>
-          </a>
+        <li className="dropdown" onClick={this.handleToggleMenu}>
+          <i className="material-icons right">more_vert</i>
         </li>
         {menuOpen && <DropdownMenu onClose={this.handleToggleMenu} />}
       </Fragment>
@@ -42,7 +40,7 @@ class Header extends React.Component {
 
   render() {
     const { me } = this.props;
-    
+
     return (
       <nav className="Header nav-wrapper">
         <Link to={!!me ? '/surveys' : '/'} className="left brand-logo">

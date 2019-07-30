@@ -1,5 +1,4 @@
-$link: #f9f9f9;
-$link-hover: darken( $link, 10% );
+@import '../variables.scss';
 
 .DropdownMenu {
   z-index: 1;
