@@ -34,14 +34,18 @@
         line-height: 2rem;
         display: flex;
         align-items: center;
-        line-height: 3rem;
-        transition: background-color .3s;
+        line-height: 3.5rem;
+        transition: background-color 0.3s;
         padding: 0 15px;
 
-        > a {
-          width: 100%;
+        :first-child {
+          display: flex;
+          align-items: center;
           color: black;
-          display: inline-block;
+
+          i {
+            margin-right: 15px;
+          }
         }
       }
 

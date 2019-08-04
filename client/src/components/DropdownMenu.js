@@ -28,12 +28,14 @@ const DropdownMenu = ({ onClose }) => {
         <ul className="dropdown-menu">
           <li>
             <Link to={paths.SETTINGS} onClick={onClose}>
+              <i className="material-icons">settings</i>
               <span>Settings</span>
             </Link>
           </li>
           <li className="divider" />
           <li>
             <a href="/api/logout" onClick={onClose}>
+              <i className="material-icons">exit_to_app</i>
               <span>Log out</span>
             </a>
           </li>
