@@ -1,8 +1,7 @@
 import React from 'react';
-import Modal from '../Modal';
+import Modal from '../common/Modal';
 
 import SurveyResultChart from './SurveyResultChart';
-// import './DeleteSurveyPrompt.scss';
 
 const SurveyResultModal = ({ isOpen, onCancel, surveyTitle }) => {
   return (

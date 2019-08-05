@@ -1,5 +1,5 @@
 import React from 'react';
-import Prompt from '../Prompt';
+import Prompt from '../common/Prompt';
 
 import './DeleteSurveyPrompt.scss';
 
