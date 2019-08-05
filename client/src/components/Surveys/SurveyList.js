@@ -5,6 +5,7 @@ import { fetchSurveys, deleteSurvey } from '../../store/actions';
 
 import DeleteSurveyPrompt from './DeleteSurveyPrompt';
 import SurveyResultModal from './SurveyResultModal';
+import SurveyListItem from './SurveyListItem';
 
 import './SurveyList.scss';
 
@@ -39,41 +40,18 @@ class SurveyList extends React.Component {
   };
 
   getSurveyTitle = () => {
-    const survey = this.props.surveys.find(survey => survey._id === this.state.openSurveyId);
+    const survey = this.props.surveys.find(survey => survey.id === this.state.openSurveyId);
     return survey ? survey.title : '';
   };
 
-  renderSurveys() {
-    const surveys = [...this.props.surveys].reverse();
-    return surveys.map((survey, i) => (
-      <div key={i} className="card red lighten-5">
-        <div className="card-action right">
-          <button className="btn-flat red white-text" onClick={() => this.openPrompt('delete', survey._id)}>
-            Delete<i className="material-icons right">delete</i>
-          </button>
-        </div>
-
-        <div className="card-content">
-          <span className="card-title">{survey.title}</span>
-          <p>{survey.body}</p>
-          <p className="right">Sent on: {new Date(survey.date_sent).toLocaleDateString()}</p>
-        </div>
-        
-        <div className="card-action">
-          <p>Yes: {survey.yes}</p>
-          <p>No: {survey.no}</p>
-          <button className="btn-flat cyan darken-1 white-text" onClick={() => this.openPrompt('results', survey._id)}>
-            Results<i className="material-icons right">pie_chart</i>
-          </button>
-        </div>
-      </div>
-    ));
-  }
-
   render() {
+    const surveys = [...this.props.surveys].reverse();
     return (
       <div className="SurveyList">
-        {this.renderSurveys()}
+        {surveys.map((survey, i) => (
+          <SurveyListItem survey={survey} openPrompt={this.openPrompt} key={i} />
+        ))}
+
         <DeleteSurveyPrompt
           isOpen={this.state.isOpenModalPrompt === 'delete'}
           onSubmit={this.handleDelete}
