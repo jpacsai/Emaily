@@ -16,8 +16,8 @@ const mapDispatchToProps = { fetchSurveys, deleteSurvey };
 
 class SurveyList extends React.Component {
   state = {
-    promptOpen: null,
-    promptSurveyId: null
+    isOpenModalPrompt: null,
+    openSurveyId: null
   };
 
   componentDidMount() {
@@ -25,21 +25,21 @@ class SurveyList extends React.Component {
   }
 
   openPrompt = (type, surveyId) => {
-    this.setState(state => ({ promptOpen: type, promptSurveyId: surveyId }));
+    this.setState(state => ({ isOpenModalPrompt: type, openSurveyId: surveyId }));
   };
 
   closePrompt = () => {
-    this.setState({ promptOpen: null, promptSurveyId: null });
+    this.setState({ isOpenModalPrompt: null, openSurveyId: null });
   };
 
   handleDelete = () => {
-    const { promptSurveyId } = this.state;
+    const { openSurveyId } = this.state;
     this.closePrompt();
-    this.props.deleteSurvey(promptSurveyId);
+    this.props.deleteSurvey(openSurveyId);
   };
 
   getSurveyTitle = () => {
-    const survey = this.props.surveys.find(survey => survey._id === this.state.promptSurveyId);
+    const survey = this.props.surveys.find(survey => survey._id === this.state.openSurveyId);
     return survey ? survey.title : '';
   };
 
@@ -75,16 +75,17 @@ class SurveyList extends React.Component {
       <div className="SurveyList">
         {this.renderSurveys()}
         <DeleteSurveyPrompt
-          isOpen={this.state.promptOpen === 'delete'}
+          isOpen={this.state.isOpenModalPrompt === 'delete'}
           onSubmit={this.handleDelete}
           onCancel={this.closePrompt}
           surveyTitle={this.getSurveyTitle()}
         />
         <SurveyResultModal
-          isOpen={this.state.promptOpen === 'results'}
+          isOpen={this.state.isOpenModalPrompt === 'results'}
           onSubmit={this.handleDelete}
           onCancel={this.closePrompt}
           surveyTitle={this.getSurveyTitle()}
+          id={this.state.openSurveyId}
         />
       </div>
     );
