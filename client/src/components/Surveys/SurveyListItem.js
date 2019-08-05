@@ -1,8 +1,8 @@
 import React from 'react';
 
 const SurveyListItem = ({survey, openPrompt}) => {
-  const { id, title, body, yes, no, date_sent } = survey;
-  
+  const { id, title, body, yes, no, date_sent, recipients } = survey;
+
   return (
     <div className="card red lighten-5">
       <div className="card-action right">
@@ -15,6 +15,7 @@ const SurveyListItem = ({survey, openPrompt}) => {
         <span className="card-title">{title}</span>
         <p>{body}</p>
         <p className="right">Sent on: {new Date(date_sent).toLocaleDateString()}</p>
+        <p>Total number of recipients: {recipients}</p>
       </div>
 
       <div className="card-action">

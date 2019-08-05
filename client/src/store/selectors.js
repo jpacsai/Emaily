@@ -17,10 +17,11 @@ export const getSurveyResults = createSelector(
   getSurvey,
   survey => {
     if (!survey) return null;
-    const { yes, no } = survey;
+    const { yes, no, recipients } = survey;
     return {
       yes,
-      no
+      no,
+      recipients
     }
   }
 )

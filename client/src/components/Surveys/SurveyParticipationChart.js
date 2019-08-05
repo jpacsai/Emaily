@@ -2,16 +2,17 @@ import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const SurveyResultChart = ({ results }) => {
-  const { yes, no } = results;
-  if (!yes && !no) return <p>Sorry, there are no available results yet.</p>;
-
+const SurveyParticipationChart = ({ results }) => {
+  const { yes, no, recipients } = results;
+  const responded = yes + no;
+  if (!responded) return <p>Sorry, there are no available results yet.</p>;
+  const notResponded = recipients - responded;
   const options = {
     chart: {
       type: 'pie'
     },
     title: {
-      text: 'Answer rate'
+      text: 'Participation rate'
     },
     tooltip: {
       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -31,16 +32,16 @@ const SurveyResultChart = ({ results }) => {
     },
     series: [
       {
-        name: 'Answers',
+        name: 'Participation',
         colorByPoint: true,
         data: [
           {
-            name: 'Yes',
-            y: (yes / (yes + no)) * 100
+            name: 'Answered',
+            y: responded / recipients * 100
           },
           {
-            name: 'No',
-            y: (no / (yes + no)) * 100
+            name: 'Not answered',
+            y: notResponded / recipients * 100
           }
         ]
       }
@@ -50,4 +51,4 @@ const SurveyResultChart = ({ results }) => {
   return <HighchartsReact highcharts={Highcharts} options={options} />;
 };
 
-export default SurveyResultChart;
+export default SurveyParticipationChart;
