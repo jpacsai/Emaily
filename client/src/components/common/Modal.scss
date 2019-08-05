@@ -16,6 +16,12 @@
     .card {
       min-width: 45%;
 
+      header {
+        i {
+          cursor: pointer;
+        }
+      }
+
       main {
         padding: 1rem 0;
       }
