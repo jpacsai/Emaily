@@ -11,16 +11,20 @@ const Prompt = ({ children, className, isOpen, onSubmit, submitLabel, onCancel, 
     <div className="Prompt-container">
       <div className={classnames('Prompt', 'card', className)}>
         <div className="card-content">
+
           <header className="card-title">
             {!!title && title}
             {!onSubmit && <i className="material-icons right" onClick={onCancel}>close</i>}
           </header>
+
           <main>{children}</main>
+
           {!!onSubmit && (
             <footer className="card-action">
               <button className="btn white-text left" onClick={onCancel}>
                 {cancelLabel || 'Cancel'}
               </button>
+              
               <button className="btn red white-text right" onClick={onSubmit}>
                 {submitLabel || 'Submit'}
               </button>

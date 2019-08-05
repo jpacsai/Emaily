@@ -4,7 +4,7 @@ import { getSurveys } from './../../store/selectors';
 import { fetchSurveys, deleteSurvey } from '../../store/actions';
 
 import DeleteSurveyPrompt from './DeleteSurveyPrompt';
-import SurveyResultPrompt from './SurveyResultPrompt';
+import SurveyResultModal from './SurveyResultModal';
 
 import './SurveyList.scss';
 
@@ -80,7 +80,7 @@ class SurveyList extends React.Component {
           onCancel={this.closePrompt}
           surveyTitle={this.getSurveyTitle()}
         />
-        <SurveyResultPrompt
+        <SurveyResultModal
           isOpen={this.state.promptOpen === 'results'}
           onSubmit={this.handleDelete}
           onCancel={this.closePrompt}
