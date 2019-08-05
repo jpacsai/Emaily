@@ -14,7 +14,7 @@ The aim of the project was to build the front- and backend of a survey-email sen
 * [Credits](#-credits)
 
 ## 🔗 Live link  
-Open the page directly from [here](https://obscure-tundra-54097.herokuapp.com/)  
+Open the page directly from [here](https://emaily-course-jpacsai.herokuapp.com/)  
 
 ## 🛠 Dev stack
 - Node, Express
