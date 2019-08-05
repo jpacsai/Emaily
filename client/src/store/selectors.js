@@ -8,7 +8,7 @@ export const getSurvey = createSelector(
   [getSurveys, (state, id) => id],
   (surveys, id) => {
     if (!surveys) return null;
-    const survey = surveys.find(survey => survey._id === id);
+    const survey = surveys.find(survey => survey.id === id);
     return survey || null;
   }
 );

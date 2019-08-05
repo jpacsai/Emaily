@@ -9,12 +9,15 @@ const requireLogin = require('../middleware/requireLogin');
 const requireCredits = require('../middleware/requireCredits');
 const Mailer = require('../services/email/mailer');
 
+const parseSurvey = require('../utils/models');
+
 const Survey = mongoose.model('surveys');
 
 module.exports = app => {
   app.get('/api/surveys', requireLogin, async (req, res) => {
-    const surveys = await Survey.find({ _belongs_to: req.user.id }).select({ recipients: false });
-    res.send(surveys);
+    const surveys = await Survey.find({ _belongs_to: req.user.id })
+    const parsed = surveys.map(survey => parseSurvey(survey));
+    res.send(parsed);
   });
 
   app.get('/api/surveys/:surveyId/:choice', (req, res) => {
@@ -26,7 +29,7 @@ module.exports = app => {
       const p = new Path('/api/surveys/:surveyId');
       const { surveyId } = p.test(req.url);
       const id = new ObjectId(surveyId);
-  
+
       const { deletedCount } = await Survey.deleteOne({ _id: id }).exec();
 
       if (!!deletedCount) console.log(`Deleted survey: ${surveyId}`);
@@ -59,7 +62,7 @@ module.exports = app => {
 
       req.user.credits -= 1;
       const updatedUser = await req.user.save();
-      
+
       res.send(updatedUser);
     } catch (err) {
       res.status(422).send(err);
@@ -101,8 +104,9 @@ module.exports = app => {
 
       if (!!updated && process.env.NODE_ENV !== 'production') {
         console.log({ surveyId, email, choice });
-        const updatedSurvey = await Survey.findOne({ _id: id }).select({ recipients: false });
-        req.app.io.emit('update-survey', updatedSurvey);
+        const updatedSurvey = await Survey.findOne({ _id: id });
+        const parsed = parseSurvey(updatedSurvey);
+        req.app.io.emit('update-survey', parsed);
       }
     });
   });
