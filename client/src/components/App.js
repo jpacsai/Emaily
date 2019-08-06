@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { routes } from '../config';
 import { fetchInitData } from '../store/actions';
 import { getLoggedInStatus } from '../store/selectors';
 
 import Header from './Header';
+import NotFoundPage from './NotFoundPage';
 
 const mapStateToProps = state => ({
   isLoggedIn: getLoggedInStatus(state)
@@ -24,7 +25,7 @@ class App extends React.Component {
     const route = routes.find(route => route.path === path);
     if (!route) return null;
     const { auth, component: Component } = route;
-    return auth && !isLoggedIn ? null : <Component />;
+    return auth && !isLoggedIn ? <h2>Please sign in</h2> : <Component />;
   }
 
   render() {
@@ -32,9 +33,12 @@ class App extends React.Component {
       <div className="container">
         <BrowserRouter>
           <Header />
+          <Switch>
             {routes.map(({ path, exact }) => (
               <Route key={path} exact={exact} path={path} render={props => this.renderRoute(props)} />
             ))}
+            <Route component={NotFoundPage} />
+          </Switch>
         </BrowserRouter>
       </div>
     );

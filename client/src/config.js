@@ -14,8 +14,8 @@ export const paths = {
 export const routes = [
   { path: paths.LANDING_PAGE, component: Landing, exact: true, auth: false },
   { path: paths.SURVEYS, component: Dashboard, exact: true, auth: true },
-  { path: paths.NEW_SURVEY, component: SurveyNew, exact: false, auth: true },
-  { path: paths.SETTINGS, component: Settings, exact: false, auth: true }
+  { path: paths.NEW_SURVEY, component: SurveyNew, exact: true, auth: true },
+  { path: paths.SETTINGS, component: Settings, exact: true, auth: true }
 ];
 
 export const formFields = [
