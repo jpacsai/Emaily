@@ -2,6 +2,11 @@ import { createSelector } from 'reselect';
 
 export const getMe = state => state.auth;
 
+export const getLoggedInStatus = createSelector(
+  getMe,
+  me => !!me
+);
+
 export const getSurveys = state => state.surveys;
 
 export const getSurvey = createSelector(
@@ -22,8 +27,8 @@ export const getSurveyResults = createSelector(
       yes,
       no,
       recipients
-    }
+    };
   }
-)
+);
 
 export const getForm = state => state.form;

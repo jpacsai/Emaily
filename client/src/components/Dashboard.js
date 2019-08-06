@@ -10,7 +10,7 @@ const Dashboard = () => {
     <div className="Dashboard">
       <header>
         <h2>Dashboard</h2>
-        <Link to={paths.NEW_SURVEYS} className="btn-floating btn-large red">
+        <Link to={paths.NEW_SURVEY} className="btn-floating btn-large red">
           <i className="large material-icons">add</i>
         </Link>
       </header>

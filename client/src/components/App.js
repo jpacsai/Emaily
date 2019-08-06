@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { paths } from './../config';
-import { fetchInitData } from './../store/actions';
+import { routes } from '../config';
+import { fetchInitData } from '../store/actions';
+import { getLoggedInStatus } from '../store/selectors';
+
 import Header from './Header';
-import Landing from './Landing';
-import Dashboard from './Dashboard';
-import SurveyNew from './Surveys/SurveyNew';
-import Settings from './Settings';
+
+const mapStateToProps = state => ({
+  isLoggedIn: getLoggedInStatus(state)
+});
 
 const mapDispatchToProps = { fetchInitData };
 
@@ -16,15 +18,23 @@ class App extends React.Component {
     this.props.fetchInitData();
   }
 
+  renderRoute(props) {
+    const { isLoggedIn } = this.props;
+    const path = props.match.path;
+    const route = routes.find(route => route.path === path);
+    if (!route) return null;
+    const { auth, component: Component } = route;
+    return auth && !isLoggedIn ? null : <Component />;
+  }
+
   render() {
     return (
       <div className="container">
         <BrowserRouter>
           <Header />
-          <Route exact path="/" component={Landing} />
-          <Route exact path={paths.SURVEYS} component={Dashboard} />
-          <Route path={paths.NEW_SURVEYS} component={SurveyNew} />
-          <Route path={paths.SETTINGS} component={Settings} />
+            {routes.map(({ path, exact }) => (
+              <Route key={path} exact={exact} path={path} render={props => this.renderRoute(props)} />
+            ))}
         </BrowserRouter>
       </div>
     );
@@ -32,6 +42,6 @@ class App extends React.Component {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);
