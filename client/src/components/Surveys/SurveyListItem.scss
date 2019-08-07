@@ -1,0 +1,17 @@
+.SurveyListItem {
+  .yes {
+    color: green;
+
+    span {
+      font-weight: bold;
+    }
+  }
+
+  .no {
+    color: red;
+
+    span {
+      font-weight: bold;
+    }
+  }
+}

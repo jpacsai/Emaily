@@ -1,10 +1,12 @@
 import React from 'react';
+import classnames from 'classnames';
+import './SurveyListItem.scss';
 
 const SurveyListItem = ({survey, openPrompt}) => {
   const { id, title, body, yes, no, date_sent, recipients } = survey;
 
   return (
-    <div className="card red lighten-5">
+    <div className={classnames("SurveyListItem", "card red lighten-5")}>
       <div className="card-action right">
         <button className="btn-flat red white-text" onClick={() => openPrompt('delete', id)}>
           Delete<i className="material-icons right">delete</i>
@@ -19,8 +21,8 @@ const SurveyListItem = ({survey, openPrompt}) => {
       </div>
 
       <div className="card-action">
-        <p>Yes: {yes}</p>
-        <p>No: {no}</p>
+        <p className="yes">Yes: <span>{yes}</span></p>
+        <p className="no">No: <span>{no}</span></p>
         <button className="btn-flat cyan darken-1 white-text" onClick={() => openPrompt('results', survey.id)}>
           Results<i className="material-icons right">pie_chart</i>
         </button>
