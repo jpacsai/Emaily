@@ -4,7 +4,7 @@ export const getMe = state => state.auth;
 
 export const getLoggedInStatus = createSelector(
   getMe,
-  me => !!me
+  me => !me ? me : true
 );
 
 export const getSurveys = state => state.surveys;

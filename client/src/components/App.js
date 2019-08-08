@@ -23,9 +23,9 @@ class App extends React.Component {
     const { isLoggedIn } = this.props;
     const path = props.match.path;
     const route = routes.find(route => route.path === path);
-    if (!route) return null;
+    if (route === false) return null;
     const { auth, component: Component } = route;
-    return auth && !isLoggedIn ? <h2>Please sign in</h2> : <Component />;
+    return auth && isLoggedIn === false ? <h2>Please sign in</h2> : <Component />;
   }
 
   render() {
