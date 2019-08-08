@@ -21,10 +21,6 @@ class SurveyList extends React.Component {
     openSurveyId: null
   };
 
-  componentDidMount() {
-    this.props.fetchSurveys();
-  }
-
   openPrompt = (type, surveyId) => {
     this.setState(state => ({ isOpenModalPrompt: type, openSurveyId: surveyId }));
   };

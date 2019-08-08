@@ -4,13 +4,15 @@ import { resolveUser, resolveSurveys, removeSurvey } from './actionCreators';
 import { initSocketIO } from './socket';
 
 export const fetchInitData = () => async (dispatch) => {
-  dispatch(fetchUser());
+  const user = await dispatch(fetchUser());
+  if (!!user) dispatch(fetchSurveys());
   if (process.env.NODE_ENV === "development") dispatch(initSocketIO());
 }
 
 export const fetchUser = () => async (dispatch) => {
   const { data: user } = await axios.get('/api/current_user');
   dispatch(resolveUser(user));
+  return user;
 }
 
 export const handleToken = (token) => async (dispatch) => {
