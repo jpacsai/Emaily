@@ -1,15 +1,15 @@
 import React from 'react';
 import Select from 'react-select';
 
-import './Filter.scss';
+import './SortBy.scss';
 
-const Filter = ({ options }) => {
+const SortBy = ({ options }) => {
   return (
-    <div className="Filter">
+    <div className="SortBy">
       <p>Sort by: </p>
       <Select options={options} />
     </div>
   );
 };
 
-export default Filter;
+export default SortBy;
