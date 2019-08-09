@@ -38,21 +38,40 @@ class SurveyList extends React.Component {
     this.props.deleteSurvey(openSurveyId);
   };
 
-  handleSortByChange = (value) => {
+  handleSortByChange = value => {
     this.props.resolveSortBy(value);
-  }
+  };
 
   getSurveyTitle = () => {
     const survey = this.props.surveys.find(survey => survey.id === this.state.openSurveyId);
     return survey ? survey.title : '';
   };
 
+  getSortedSurveys = () => {
+    const { surveys, sortBySettings } = this.props;
+    switch (sortBySettings) {
+      case 'oldest':
+        return surveys.sort((a, b) => new Date(a.date_sent) - new Date(b.date_sent));
+      case 'answeredLow':
+        return surveys.sort((a, b) => (a.yes + a.no) / a.recipients - (b.yes + b.no) / b.recipients);
+      case 'answeredHigh':
+        return surveys.sort((a, b) => (b.yes + b.no) / b.recipients - (a.yes + a.no) / a.recipients);
+      default:
+        return surveys.sort((a, b) => new Date(b.date_sent) - new Date(a.date_sent));
+    }
+  };
+
   render() {
-    const surveys = [...this.props.surveys].reverse();
+    const surveys = this.getSortedSurveys();
+    if (!surveys) return null;
     return (
       <div className="SurveyList">
         <header>
-          <SortBy options={surveySortOptions} defaultValue={this.props.sortBySettings} onChange={this.handleSortByChange}/>
+          <SortBy
+            options={surveySortOptions}
+            defaultValue={this.props.sortBySettings}
+            onChange={this.handleSortByChange}
+          />
         </header>
         {surveys.map((survey, i) => (
           <SurveyListItem survey={survey} openPrompt={this.openPrompt} key={i} />
