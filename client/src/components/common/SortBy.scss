@@ -1,3 +1,12 @@
 .SortBy {
   display: flex;
+  align-items: center;
+
+  p {
+    margin-right: 1rem;
+  }
+
+  > :not(p) {
+    width: 12.5rem;
+  }
 }
