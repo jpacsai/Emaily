@@ -32,3 +32,10 @@ export const getSurveyResults = createSelector(
 );
 
 export const getForm = state => state.form;
+
+export const getSettings = state => state.settings;
+
+export const getSurveySortBySettings = createSelector(
+  getSettings,
+  settings => settings.sortBy
+)
