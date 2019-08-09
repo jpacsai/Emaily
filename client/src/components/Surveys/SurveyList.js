@@ -1,19 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getSurveys } from './../../store/selectors';
-import { fetchSurveys, deleteSurvey } from '../../store/actions';
+import { surveySortOptions } from '../../config';
+import { getSurveys, getSurveySortBySettings } from './../../store/selectors';
+import { fetchSurveys, deleteSurvey, resolveSortBy } from '../../store/actions';
 
 import DeleteSurveyPrompt from './DeleteSurveyPrompt';
 import SurveyResultModal from './SurveyResultModal';
 import SurveyListItem from './SurveyListItem';
+import SortBy from './../common/SortBy';
 
 import './SurveyList.scss';
 
 const mapStateToProps = state => ({
-  surveys: getSurveys(state)
+  surveys: getSurveys(state),
+  sortBySettings: getSurveySortBySettings(state)
 });
 
-const mapDispatchToProps = { fetchSurveys, deleteSurvey };
+const mapDispatchToProps = { fetchSurveys, deleteSurvey, resolveSortBy };
 
 class SurveyList extends React.Component {
   state = {
@@ -35,6 +38,10 @@ class SurveyList extends React.Component {
     this.props.deleteSurvey(openSurveyId);
   };
 
+  handleSortByChange = (value) => {
+    this.props.resolveSortBy(value);
+  }
+
   getSurveyTitle = () => {
     const survey = this.props.surveys.find(survey => survey.id === this.state.openSurveyId);
     return survey ? survey.title : '';
@@ -44,6 +51,9 @@ class SurveyList extends React.Component {
     const surveys = [...this.props.surveys].reverse();
     return (
       <div className="SurveyList">
+        <header>
+          <SortBy options={surveySortOptions} defaultValue={this.props.sortBySettings} onChange={this.handleSortByChange}/>
+        </header>
         {surveys.map((survey, i) => (
           <SurveyListItem survey={survey} openPrompt={this.openPrompt} key={i} />
         ))}
