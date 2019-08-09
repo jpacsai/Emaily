@@ -24,3 +24,10 @@ export const formFields = [
   { label: 'Email body', name: 'body' },
   { label: 'Recipient List', name: 'recipients', validation: emailValidation }
 ];
+
+export const surveySortOptions = [
+  { value: 'newest', label: 'Created: newest' },
+  { value: 'oldest', label: 'Created: oldest' },
+  { value: 'answeredLow', label: 'Answered: lowest' },
+  { value: 'answeredHigh', label: 'Answered: highest' }
+]
