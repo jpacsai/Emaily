@@ -90,9 +90,20 @@ class SurveyList extends React.Component {
     return sortedFilteredSurveys;
   }
 
+  renderSurveyList() {
+    const { surveys } = this.props;
+    if (!surveys || surveys.length === 0) return null;
+
+    const displaySurveys = this.getSurveysFilteredSorted();
+    if (displaySurveys.length === 0) {
+      return <p>Sorry, no surveys to display. Please try changing the filters above.</p>
+    }
+    return displaySurveys.map((survey, i) => (
+      <SurveyListItem survey={survey} openPrompt={this.openPrompt} key={i} />
+    ));
+  }
+
   render() {
-    const surveys = this.getSurveysFilteredSorted();
-    if (!surveys) return null;
     const { sortBySettings, filterSettings } = this.props;
     return (
       <div className="SurveyList">
@@ -111,9 +122,7 @@ class SurveyList extends React.Component {
           />
         </header>
         
-        {surveys.map((survey, i) => (
-          <SurveyListItem survey={survey} openPrompt={this.openPrompt} key={i} />
-        ))}
+        {this.renderSurveyList()}
 
         <DeleteSurveyPrompt
           isOpen={this.state.isOpenModalPrompt === 'delete'}
