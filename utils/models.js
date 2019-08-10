@@ -7,5 +7,6 @@ module.exports = ({ yes, no, _id, title, subject, body, recipients, date_sent, l
   body,
   recipients: recipients.length,
   date_sent,
-  last_responded
+  last_responded,
+  responseRate: (yes + no ) / recipients.length * 100
 });
