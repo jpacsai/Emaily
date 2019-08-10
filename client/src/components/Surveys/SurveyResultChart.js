@@ -4,7 +4,7 @@ import HighchartsReact from 'highcharts-react-official';
 
 const SurveyResultChart = ({ results }) => {
   const { yes, no } = results;
-  if (!yes && !no) return <p>Sorry, there are no available results yet.</p>;
+  if (!yes && !no) return null;
 
   const options = {
     chart: {
