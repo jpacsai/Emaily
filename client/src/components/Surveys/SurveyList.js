@@ -7,7 +7,7 @@ import { fetchSurveys, deleteSurvey, resolveSortBy } from '../../store/actions';
 import DeleteSurveyPrompt from './DeleteSurveyPrompt';
 import SurveyResultModal from './SurveyResultModal';
 import SurveyListItem from './SurveyListItem';
-import SortBy from './../common/SortBy';
+import Select from './../common/Select';
 
 import './SurveyList.scss';
 
@@ -67,10 +67,11 @@ class SurveyList extends React.Component {
     return (
       <div className="SurveyList">
         <header>
-          <SortBy
+          <Select
             options={surveySortOptions}
             defaultValue={this.props.sortBySettings}
             onChange={this.handleSortByChange}
+            text="Sort by:"
           />
         </header>
         {surveys.map((survey, i) => (
