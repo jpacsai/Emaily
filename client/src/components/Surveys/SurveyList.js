@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { surveySortOptions } from '../../config';
-import { getSurveys, getSurveySortBySettings } from './../../store/selectors';
-import { fetchSurveys, deleteSurvey, resolveSortBy } from '../../store/actions';
+import { surveySortOptions, surveyFilterOptions } from '../../config';
+import { getSurveys, getSurveySortBySettings, getSurveyFilterSettings } from './../../store/selectors';
+import { fetchSurveys, deleteSurvey, updateSortBy, updateFilter } from '../../store/actions';
 
 import DeleteSurveyPrompt from './DeleteSurveyPrompt';
 import SurveyResultModal from './SurveyResultModal';
@@ -13,10 +13,11 @@ import './SurveyList.scss';
 
 const mapStateToProps = state => ({
   surveys: getSurveys(state),
-  sortBySettings: getSurveySortBySettings(state)
+  sortBySettings: getSurveySortBySettings(state),
+  filterSettings: getSurveyFilterSettings(state)
 });
 
-const mapDispatchToProps = { fetchSurveys, deleteSurvey, resolveSortBy };
+const mapDispatchToProps = { fetchSurveys, deleteSurvey, updateSortBy, updateFilter };
 
 class SurveyList extends React.Component {
   state = {
@@ -39,16 +40,38 @@ class SurveyList extends React.Component {
   };
 
   handleSortByChange = value => {
-    this.props.resolveSortBy(value);
+    this.props.updateSortBy(value);
   };
 
+  handleFilterChange = value => {
+    this.props.updateFilter(value);
+  };
+  
   getSurveyTitle = () => {
     const survey = this.props.surveys.find(survey => survey.id === this.state.openSurveyId);
     return survey ? survey.title : '';
   };
+  
+  getFilteredSurveys = () => {
+    const { surveys, filterSettings } = this.props;
+    switch (filterSettings) {
+      case 'hasResult':
+        return surveys.filter(({ yes, no }) => yes + no > 0);
+      case 'noResult':
+        return surveys.filter(({ yes, no }) => yes + no === 0);
+      case 'moreYes':
+        return surveys.filter(({ yes, no }) => yes > no);
+      case 'moreNo':
+        return surveys.filter(({ yes, no }) => yes < no);
+      case 'equal':
+        return surveys.filter(({ yes, no }) => yes + no > 0 && yes === no);
+      default:
+        return surveys;
+    }
+  };
 
-  getSortedSurveys = () => {
-    const { surveys, sortBySettings } = this.props;
+  getSortedSurveys = (surveys) => {
+    const { sortBySettings } = this.props;
     switch (sortBySettings) {
       case 'oldest':
         return surveys.sort((a, b) => new Date(a.date_sent) - new Date(b.date_sent));
@@ -61,19 +84,33 @@ class SurveyList extends React.Component {
     }
   };
 
+  getSurveysFilteredSorted = () => {
+    const filteredSurveys = this.getFilteredSurveys();
+    const sortedFilteredSurveys = this.getSortedSurveys(filteredSurveys);
+    return sortedFilteredSurveys;
+  }
+
   render() {
-    const surveys = this.getSortedSurveys();
+    const surveys = this.getSurveysFilteredSorted();
     if (!surveys) return null;
+    const { sortBySettings, filterSettings } = this.props;
     return (
       <div className="SurveyList">
         <header>
           <Select
             options={surveySortOptions}
-            defaultValue={this.props.sortBySettings}
+            defaultValue={sortBySettings}
             onChange={this.handleSortByChange}
             text="Sort by:"
           />
+          <Select
+            options={surveyFilterOptions}
+            defaultValue={filterSettings}
+            onChange={this.handleFilterChange}
+            text="Filter:"
+          />
         </header>
+        
         {surveys.map((survey, i) => (
           <SurveyListItem survey={survey} openPrompt={this.openPrompt} key={i} />
         ))}

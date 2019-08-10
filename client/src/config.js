@@ -31,3 +31,12 @@ export const surveySortOptions = [
   { value: 'answeredLow', label: 'Answered: lowest' },
   { value: 'answeredHigh', label: 'Answered: highest' }
 ]
+
+export const surveyFilterOptions = [
+  { value: 'all', label: 'All'},
+  { value: 'hasResult', label: 'Has results'},
+  { value: 'noResult', label: 'No results' },
+  { value: 'moreYes', label: 'More positive response' },
+  { value: 'moreNo', label: 'More negative response' },
+  { value: 'equal', label: 'Equal responses'}
+]

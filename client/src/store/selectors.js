@@ -39,3 +39,8 @@ export const getSurveySortBySettings = createSelector(
   getSettings,
   settings => settings.sortBy
 )
+
+export const getSurveyFilterSettings = createSelector(
+  getSettings,
+  settings => settings.filter
+)
