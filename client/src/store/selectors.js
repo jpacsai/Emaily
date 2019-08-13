@@ -2,6 +2,11 @@ import { createSelector } from 'reselect';
 
 export const getMe = state => state.auth;
 
+export const getMyCredits = createSelector(
+  getMe,
+  me => me ? me.credits : null
+)
+
 export const getLoggedInStatus = createSelector(
   getMe,
   me => !me ? me : true

@@ -1,16 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { paths } from './../config';
+import { connect } from 'react-redux';
+import classnames from 'classnames';
+import { paths } from '../config';
+import { getMyCredits } from '../store/selectors';
 
 import SurveyList from './Surveys/SurveyList';
 import './Dashboard.scss';
 
-const Dashboard = () => {
+const mapStateToProps = (state) => ({
+  credit: getMyCredits(state)
+});
+
+const Dashboard = ({ credit }) => {
   return (
     <div className="Dashboard">
       <header>
         <h2>Dashboard</h2>
-        <Link to={paths.NEW_SURVEY} className="btn-floating btn-large red">
+        <Link to={paths.NEW_SURVEY} className={classnames("btn-floating btn-large", credit ? "red" : "grey disabled")}>
           <i className="large material-icons">add</i>
         </Link>
       </header>
@@ -19,4 +26,7 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default connect(
+  mapStateToProps,
+  null
+)(Dashboard);
