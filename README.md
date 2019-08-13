@@ -137,8 +137,27 @@ Service worker is being activated in the production version
 The site was tested on Google Chrome only
 
 ## 🍴 How to use 
-
-TODO
+- log in with Google credentials
+- purchase credit:
+   - click on "ADD CREDITS"
+   - input any email address (even false one)
+   - key in the following credit card number: "4242 4242 4242 4242"
+   - any dates in the future
+   - any CVC (3 digits)
+- create new survey:
+   - on Dashboard page click on the big "+" sign button
+   - add survey title
+   - add subject line
+   - add email body: this will be the question in the survey email
+   - email address(es) separated with comas
+   - click on next, check the text, send survey
+- list of surveys:
+   - on Dashboard page the existing surveys are displayed in the order from newest to oldest
+   - surveys can be filtered and the ordering changed by the drop down field above the survey list
+   - survey results can be checked by clicking on the "RESULTS" button
+   - each survey can be deleted with the "DELETE" button
+- settings:
+   - the user account can be deleted on the Settings page
 
 ## 📜 Licence
 
