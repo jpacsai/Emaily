@@ -2,8 +2,8 @@
 coursework for [Udemy - Node with React: Fullstack Web Development course](https://www.udemy.com/node-with-react-fullstack-web-development/)
 
 The aim of the project was to build the front- and backend of a survey-email sender web application.
-The master branch contains an improved version of the app described in the course.
-Many additional features has been added
+
+The `course` branch contains the app described in the course, the master branch contains an improved version with many additional features.
 
 ***
 
