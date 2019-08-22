@@ -8,6 +8,8 @@ import { getLoggedInStatus } from '../store/selectors';
 import Header from './Header';
 import NotFoundPage from './NotFoundPage';
 
+import './App.scss';
+
 const mapStateToProps = state => ({
   isLoggedIn: getLoggedInStatus(state)
 });
