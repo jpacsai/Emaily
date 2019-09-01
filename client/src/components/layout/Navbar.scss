@@ -3,32 +3,50 @@
 .Navbar {
   z-index: 1;
   padding: 0 35px 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 75vw 1fr;
+  
+  .brand-logo {
+    flex-grow: 0;
+    left: unset;
+    position: unset;
+    transform: unset;
+    font-family: 'Comfortaa';
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: black;
+
+    &::first-letter { 
+      color: $red;
+    }
+  }
 
   .nav-list {
     position: relative;
+    display: flex;
+    justify-content: flex-end;
+    color: black;
+    width: 75vw;
+    max-width: 1016px;
 
     > * {
       padding: 0 15px;
     }
+  }
 
-    .dropdown {
-      margin: 0;
+  .dropdown {
+    margin: 0;
+    min-height: 64px;
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    color: black;
+
+    > i {
       min-height: 64px;
+      margin: 0;
       display: flex;
       align-items: center;
-      cursor: pointer;
-
-      > i {
-        min-height: 64px;
-        margin: 0;
-        display: flex;
-        align-items: center;
-      }
-    }
-
-    .dropdown:hover {
-      background-color: $red-hover;
     }
   }
 }

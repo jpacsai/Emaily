@@ -22,31 +22,30 @@ class Navbar extends React.Component {
 
   renderContent = () => {
     const { me } = this.props;
-    const { menuOpen } = this.state;
 
     return !me ? null : (
       <Fragment>
+        <li className="credits">Credits: {me.credits}</li>
         <li>
           <StripeContainer />
         </li>
-        <li className="credits">Credits: {me.credits}</li>
-        <li className="dropdown" onClick={this.handleToggleMenu}>
-          <i className="material-icons right">more_vert</i>
-        </li>
-        {menuOpen && <DropdownMenu onClose={this.handleToggleMenu} />}
       </Fragment>
     );
   };
 
   render() {
     const { me } = this.props;
-
+    const { menuOpen } = this.state;
     return (
       <nav className="Navbar nav-wrapper white">
         <Link to={!!me ? '/surveys' : '/'} className="brand-logo">
-          Emaily
+          Emaily.
         </Link>
         <ul className="right nav-list">{this.renderContent()}</ul>
+        <div className="dropdown" onClick={this.handleToggleMenu}>
+          <i className="material-icons right">more_vert</i>
+        </div>
+        {menuOpen && <DropdownMenu onClose={this.handleToggleMenu} className="dropdown" />}
       </nav>
     );
   }

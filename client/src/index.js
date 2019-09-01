@@ -5,6 +5,7 @@ import store from './store';
 
 import App from './components/App';
 import 'materialize-css/dist/css/materialize.min.css';
+import './index.scss';
 
 ReactDOM.render(
   <Provider store={store}>
