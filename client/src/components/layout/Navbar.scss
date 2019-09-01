@@ -1,6 +1,10 @@
-@import '../variables.scss';
+@import '../../variables.scss';
 
-.Header {
+.Navbar {
+  z-index: 1;
+  padding: 0 35px 0;
+  display: flex;
+
   .nav-list {
     position: relative;
 

@@ -5,7 +5,7 @@ import { routes } from '../config';
 import { fetchInitData } from '../store/actions';
 import { getLoggedInStatus } from '../store/selectors';
 
-import Header from './Header';
+import Navbar from './layout/Navbar';
 import NotFoundPage from './NotFoundPage';
 
 import './App.scss';
@@ -32,15 +32,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="App">
         <BrowserRouter>
-          <Header />
-          <Switch>
-            {routes.map(({ path, exact }) => (
-              <Route key={path} exact={exact} path={path} render={props => this.renderRoute(props)} />
-            ))}
-            <Route component={NotFoundPage} />
-          </Switch>
+          <Navbar />
+          <main>
+            <Switch>
+              {routes.map(({ path, exact }) => (
+                <Route key={path} exact={exact} path={path} render={props => this.renderRoute(props)} />
+              ))}
+              <Route component={NotFoundPage} />
+            </Switch>
+          </main>
         </BrowserRouter>
       </div>
     );

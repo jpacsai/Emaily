@@ -1,17 +1,17 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getMe } from '../store/selectors';
+import { getMe } from '../../store/selectors';
 
-import StripeContainer from './StripeContainer';
-import DropdownMenu from './DropdownMenu';
-import './Header.scss';
+import StripeContainer from '../StripeContainer';
+import DropdownMenu from '../DropdownMenu';
+import './Navbar.scss';
 
 const mapStateToProps = state => ({
   me: getMe(state)
 });
 
-class Header extends React.Component {
+class Navbar extends React.Component {
   state = {
     menuOpen: false
   };
@@ -42,8 +42,8 @@ class Header extends React.Component {
     const { me } = this.props;
 
     return (
-      <nav className="Header nav-wrapper">
-        <Link to={!!me ? '/surveys' : '/'} className="left brand-logo">
+      <nav className="Navbar nav-wrapper white">
+        <Link to={!!me ? '/surveys' : '/'} className="brand-logo">
           Emaily
         </Link>
         <ul className="right nav-list">{this.renderContent()}</ul>
@@ -55,4 +55,4 @@ class Header extends React.Component {
 export default connect(
   mapStateToProps,
   null
-)(Header);
+)(Navbar);
