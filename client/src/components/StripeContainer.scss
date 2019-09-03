@@ -1,0 +1,21 @@
+@import '../variables.scss';
+
+.StripeCheckout {
+  > div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    .btn {
+      padding: 0 1.75rem;
+      font-size: 1rem;
+      line-height: 1rem;
+      font-weight: bold;
+      color: $dark-blue;
+      border: 2px solid $dark-blue;
+      border-radius: 1.75rem;
+      background-color: unset;
+      box-shadow: unset;
+    }
+  }
+}
