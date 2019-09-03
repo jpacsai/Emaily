@@ -2,22 +2,23 @@
 
 .Navbar {
   z-index: 1;
-  padding: 0 35px 0;
   display: grid;
-  grid-template-columns: 1fr 75vw 1fr;
-  
+  grid-template-columns: minmax(12.5vw, 1fr) 1fr minmax(12.5vw, 1fr);
+
   .brand-logo {
-    flex-grow: 0;
-    left: unset;
     position: unset;
+    left: unset;
     transform: unset;
+    flex-grow: 0;
+    padding-left: 35px;
     font-family: 'Comfortaa';
     font-size: 1.5rem;
+    font-weight: bold;
     text-transform: uppercase;
     color: black;
 
-    &::first-letter { 
-      color: $red;
+    &::first-letter {
+      color: $primary;
     }
   }
 
@@ -28,13 +29,22 @@
     color: black;
     width: 75vw;
     max-width: 1016px;
+    font-family: 'Comfortaa';
 
     > * {
-      padding: 0 15px;
+      display: flex;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .credits {
+      padding: 0 2rem;
     }
   }
 
   .dropdown {
+    padding-right: 35px;
     margin: 0;
     min-height: 64px;
     display: flex;

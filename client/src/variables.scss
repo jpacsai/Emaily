@@ -1,5 +1,7 @@
-$red: #f56960;
-$red-hover: darken(desaturate($red, 19.83), 6.67);
+$background-grey: #f1f1f1;
+$primary: #f56960;
+$red-hover: darken(desaturate($primary, 19.83), 6.67);
 $link: #f9f9f9;
-$link-hover: darken( $link, 10% );
+$link-hover: darken($link, 10%);
 $dark-blue: #133c55;
+$white: white;
