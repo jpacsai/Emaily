@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { paths } from '../config';
 import { getMyCredits } from '../store/selectors';
 
+import Page from './common/Page';
+import Link from './common/Link';
+import Button from './common/Button';
 import SurveyList from './Surveys/SurveyList';
 import './Dashboard.scss';
 
@@ -13,16 +15,18 @@ const mapStateToProps = (state) => ({
 });
 
 const Dashboard = ({ credit }) => {
+  const hasNoCredit = credit === 0;
   return (
-    <div className="Dashboard">
+    <Page className='Dashboard'>
       <header>
-        <h2>Dashboard</h2>
-        <Link to={paths.NEW_SURVEY} className={classnames("btn-floating btn-large", credit ? "red" : "grey disabled")}>
-          <i className="large material-icons">add</i>
+        <Link to={paths.NEW_SURVEY} disabled={hasNoCredit} >
+          <Button icon='add' className={classnames(hasNoCredit && 'disabled')}>
+            Add survey
+          </Button>
         </Link>
       </header>
       <SurveyList />
-    </div>
+    </Page>
   );
 };
 
