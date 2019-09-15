@@ -22,8 +22,7 @@ class Navbar extends React.Component {
 
   renderContent = () => {
     const { me } = this.props;
-
-    return !me ? null : (
+    return (
       <Fragment>
         <li className="credits">Credits: {me.credits}</li>
         <li className="stripe">
@@ -41,11 +40,15 @@ class Navbar extends React.Component {
         <Link to={!!me ? '/surveys' : '/'} className="brand-logo">
           Emaily.
         </Link>
-        <ul className="nav-list">{this.renderContent()}</ul>
-        <div className="dropdown" onClick={this.handleToggleMenu}>
-          <i className="material-icons">menu</i>
-        </div>
-        {menuOpen && <DropdownMenu onClose={this.handleToggleMenu} className="dropdown" />}
+        {me && (
+          <Fragment>
+            <ul className="nav-list">{this.renderContent()}</ul>
+            <div className="dropdown" onClick={this.handleToggleMenu}>
+              <i className="material-icons">menu</i>
+            </div>
+          </Fragment>
+        )}
+        {me && menuOpen && <DropdownMenu onClose={this.handleToggleMenu} className="dropdown" />}
       </nav>
     );
   }
